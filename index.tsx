@@ -1,16 +1,4 @@
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// 이 파일은 더 이상 React를 사용하지 않으므로 비워두거나 
+// index.html 내의 스크립트가 실행되는 것을 보장합니다.
+console.log("Vanilla JS Landing Page initialized.");

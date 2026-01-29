@@ -7,42 +7,257 @@
     <title>특별 혜택 - 프리미엄 이벤트 쿠폰 발행</title>
     <meta name="description" content="지금 바로 한정판 이벤트 쿠폰을 다운로드하고 특별한 혜택을 누리세요.">
     <meta name="keywords" content="이벤트, 쿠폰, 할인, 혜택, 랜딩페이지">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
         }
         .font-serif {
             font-family: 'Playfair Display', serif;
         }
-        @keyframes fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* 애니메이션 효과 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
+        /* 쿠폰 디자인 디테일 */
+        .coupon-cut {
+            position: relative;
+        }
+        .coupon-cut::before, .coupon-cut::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background: #f8fafc; /* bg-slate-50 */
+            border-radius: 50%;
+            transform: translateY(-50%);
+            border: 1px solid #e2e8f0;
+        }
+        .coupon-cut::before { left: -15px; }
+        .coupon-cut::after { right: -15px; }
     </style>
 <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
     "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
 </head>
-<body class="bg-slate-50 text-slate-900">
-    <div id="root"></div>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- 상단 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-xl font-serif font-bold tracking-wider text-amber-700">LUXE PREMIER</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#event-info" class="text-slate-600 hover:text-amber-700 text-sm font-medium transition-colors">이벤트 안내</a>
+                    <a href="#coupon-section" class="text-slate-600 hover:text-amber-700 text-sm font-medium transition-colors">쿠폰 받기</a>
+                    <a href="#" class="text-slate-600 hover:text-amber-700 text-sm font-medium transition-colors">고객지원</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 히어로 섹션 -->
+    <header class="relative h-[70vh] flex items-center justify-center overflow-hidden pt-16">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2070" 
+                 alt="Main Banner" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <p class="text-amber-400 font-medium tracking-[0.3em] mb-4 uppercase fade-in">Limited Offer</p>
+            <h1 class="text-4xl md:text-7xl font-serif text-white mb-6 leading-tight fade-in">
+                당신만을 위한<br>특별한 초대
+            </h1>
+            <p class="text-slate-200 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light fade-in">
+                올 여름, 럭스 프리미어와 함께하는 <br>
+                감각적인 라이프스타일의 시작을 경험하세요.
+            </p>
+            <a href="#coupon-section" class="inline-block bg-amber-600 hover:bg-amber-500 text-white px-10 py-4 rounded-full text-lg font-medium transition-all transform hover:scale-105 shadow-2xl fade-in">
+                지금 쿠폰 받기
+            </a>
+        </div>
+    </header>
+
+    <!-- 이벤트 설명 섹션 -->
+    <section id="event-info" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">EVENT GUIDE</h2>
+                <div class="w-16 h-1 bg-amber-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div class="fade-in">
+                    <div class="mb-10">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-sm">01</span>
+                            참여 대상
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed pl-11">
+                            럭스 프리미어 신규 회원 및 기존 멤버십 회원님들께 <br>
+                            감사의 마음을 담아 준비했습니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-sm">02</span>
+                            이벤트 기간
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed pl-11">
+                            2024년 6월 15일 ~ 2024년 7월 15일까지 <br>
+                            <span class="text-sm text-amber-600">* 한정 수량 소진 시 조기 종료됩니다.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="mb-10">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-sm">03</span>
+                            사용 방법
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed pl-11">
+                            발급된 쿠폰은 마이페이지에서 확인 가능하며, <br>
+                            결제 시 자동으로 할인 혜택이 적용됩니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mr-3 text-sm">04</span>
+                            유의사항
+                        </h3>
+                        <ul class="text-sm text-slate-500 list-disc pl-16 space-y-1">
+                            <li>계정당 1회만 발급 가능합니다.</li>
+                            <li>타 쿠폰 및 적립금과 중복 사용이 제한됩니다.</li>
+                            <li>일부 신상품 및 세일 품목은 제외될 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 쿠폰 발행 섹션 -->
+    <section id="coupon-section" class="py-24 bg-slate-50">
+        <div class="max-w-xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-serif font-bold mb-12 text-slate-800 fade-in">Your Invitation Card</h2>
+            
+            <div class="coupon-cut relative overflow-hidden bg-white rounded-2xl shadow-2xl border border-slate-200 fade-in transition-all duration-500 hover:shadow-amber-200/50">
+                <div class="absolute top-0 left-0 w-full h-2 bg-amber-600"></div>
+                
+                <div class="p-10">
+                    <div class="flex justify-between items-center mb-8">
+                        <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Season Special Benefit</span>
+                        <span class="text-amber-700 font-serif font-bold italic">Luxe Premier</span>
+                    </div>
+                    
+                    <div class="py-10 border-y border-dashed border-slate-200">
+                        <h3 class="text-6xl font-bold text-slate-800 mb-2">30% OFF</h3>
+                        <p class="text-slate-500 tracking-[0.2em] font-light">EXCLUSIVE DISCOUNT</p>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <button id="issueBtn" class="w-full py-5 rounded-xl text-lg font-bold transition-all duration-300 flex items-center justify-center space-x-2 bg-slate-900 text-white hover:bg-amber-800 active:scale-95 shadow-xl">
+                            <span>쿠폰 발행하기</span>
+                        </button>
+                        
+                        <div id="successMsg" class="hidden mt-6 text-emerald-600 font-medium flex items-center justify-center animate-bounce">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            쿠폰이 성공적으로 발행되었습니다!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="mt-10 text-slate-400 text-sm italic fade-in">
+                * 발행 후 30일 이내에 사용하셔야 혜택을 받으실 수 있습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-slate-900 text-slate-500 py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <span class="text-2xl font-serif font-bold text-white tracking-widest block mb-8">LUXE PREMIER</span>
+            <div class="flex flex-wrap justify-center gap-8 mb-10 text-sm">
+                <a href="#" class="hover:text-amber-500 transition-colors">회사소개</a>
+                <a href="#" class="hover:text-amber-500 transition-colors">이용약관</a>
+                <a href="#" class="hover:text-amber-500 transition-colors font-bold text-slate-300">개인정보처리방침</a>
+                <a href="#" class="hover:text-amber-500 transition-colors">매장안내</a>
+            </div>
+            <p class="text-xs mb-2">서울특별시 강남구 테헤란로 123 | 대표이사: 홍길동 | 사업자등록번호: 123-45-67890</p>
+            <p class="text-xs">© 2024 Luxe Premier. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 스크립트 -->
+    <script>
+        // 1. 쿠폰 발행 로직
+        const issueBtn = document.getElementById('issueBtn');
+        const successMsg = document.getElementById('successMsg');
+
+        issueBtn.addEventListener('click', function() {
+            if (this.classList.contains('bg-emerald-500')) return;
+
+            // 로딩 상태 표시
+            const originalContent = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>발급 중...</span>
+            `;
+
+            // 1.5초 후 성공 상태로 변경
+            setTimeout(() => {
+                this.classList.remove('bg-slate-900', 'hover:bg-amber-800');
+                this.classList.add('bg-emerald-500', 'cursor-default');
+                this.innerHTML = '<span>발급 완료</span>';
+                this.disabled = false;
+                successMsg.classList.remove('hidden');
+            }, 1500);
+        });
+
+        // 2. 스크롤 애니메이션 (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
