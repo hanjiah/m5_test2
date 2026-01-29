@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9QWW6XTZ8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N9QWW6XTZ8');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>특별 혜택 - 프리미엄 이벤트 쿠폰 발행</title>
@@ -222,7 +231,6 @@
             if (this.classList.contains('bg-emerald-500')) return;
 
             // 로딩 상태 표시
-            const originalContent = this.innerHTML;
             this.disabled = true;
             this.innerHTML = `
                 <svg class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
